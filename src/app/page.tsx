@@ -405,7 +405,7 @@ export default function Home() {
                   ref={(el) => {
                     avatarRefs.current[0] = el;
                   }}
-                  className={`relative w-[200px] h-[200px] sm:w-[280px] sm:h-[280px] translate-x-3 sm:translate-x-4 rounded-full overflow-hidden shadow-2xl ring-1 ring-white/10 transition-transform duration-[2000ms]
+                  className={`relative w-[200px] h-[200px] sm:w-[280px] sm:h-[280px] rounded-full overflow-hidden shadow-2xl ring-1 ring-white/10 transition-transform duration-[2000ms]
                     ${isSpeaking ? "scale-105" : "scale-100"}
                   `}
                 >
@@ -413,7 +413,7 @@ export default function Home() {
                     src={CREATOR.image}
                     alt={CREATOR.name}
                     fill
-                    className="object-cover object-center scale-110"
+                    className="object-cover object-[75%_center] scale-100"
                     priority
                   />
                   <div className="absolute inset-0 bg-black/20" />
