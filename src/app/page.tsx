@@ -353,7 +353,7 @@ export default function Home() {
       {/* ── Content ── */}
       <div
         className={`
-          relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 sm:px-10 py-16 sm:py-20
+          relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-5 sm:px-10 py-14 sm:py-20 max-[360px]:px-3 max-[360px]:py-8
           transition-all duration-1000 ease-out
           ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}
         `}
@@ -372,7 +372,7 @@ export default function Home() {
             {/* Absolute Top Right End Call Button (Page Corner) */}
             <button
               onClick={handleEndCall}
-              className="group fixed top-6 right-6 sm:top-10 sm:right-10 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-rose-900/35 hover:border-rose-700/60 transition-colors duration-300 z-50 backdrop-blur-md"
+              className="group fixed top-6 right-6 sm:top-10 sm:right-10 w-12 h-12 sm:w-14 sm:h-14 max-[360px]:top-4 max-[360px]:right-4 max-[360px]:w-10 max-[360px]:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-rose-900/35 hover:border-rose-700/60 transition-colors duration-300 z-50 backdrop-blur-md"
               aria-label="End call"
             >
               <svg
@@ -391,7 +391,7 @@ export default function Home() {
             </button>
 
             {/* Central Minimal Avatar */}
-            <div className="relative z-10 flex flex-col items-center gap-4 sm:gap-6 animate-fade-in-up">
+            <div className="relative z-10 flex flex-col items-center gap-4 sm:gap-6 max-[360px]:gap-3 animate-fade-in-up">
               {/* Subtle Breathing Avatar */}
               <div className="relative">
                 {/* Voice reactive glow */}
@@ -405,7 +405,7 @@ export default function Home() {
                   ref={(el) => {
                     avatarRefs.current[0] = el;
                   }}
-                  className={`relative w-[200px] h-[200px] sm:w-[280px] sm:h-[280px] rounded-full overflow-hidden shadow-2xl ring-1 ring-white/10 transition-transform duration-[2000ms]
+                  className={`relative w-[200px] h-[200px] sm:w-[280px] sm:h-[280px] max-[360px]:w-[170px] max-[360px]:h-[170px] rounded-full overflow-hidden shadow-2xl ring-1 ring-white/10 transition-transform duration-[2000ms]
                     ${isSpeaking ? "scale-105" : "scale-100"}
                   `}
                 >
@@ -421,8 +421,8 @@ export default function Home() {
               </div>
 
               {/* Minimal Text Status & Timer */}
-              <div className="text-center flex flex-col items-center gap-2 sm:gap-3">
-                <h3 className="text-2xl sm:text-3xl font-light text-white tracking-wide">
+              <div className="text-center flex flex-col items-center gap-2 sm:gap-3 max-[360px]:gap-1.5">
+                <h3 className="text-2xl sm:text-3xl max-[360px]:text-xl font-light text-white tracking-wide">
                   {CREATOR.name}
                 </h3>
 
@@ -430,17 +430,17 @@ export default function Home() {
                   <div
                     className={`w-1.5 h-1.5 rounded-full ${callPhase === "connecting" ? "bg-amber-300 animate-pulse" : callPhase === "speaking" ? "bg-green-400 animate-pulse" : "bg-cyan-300"}`}
                   />
-                  <span className="text-[11px] sm:text-xs text-white/65 uppercase tracking-[0.18em] font-semibold">
+                  <span className="text-[11px] sm:text-xs max-[360px]:text-[10px] text-white/65 uppercase tracking-[0.18em] max-[360px]:tracking-[0.14em] font-semibold">
                     {callStatusLabel}
                   </span>
                 </div>
 
                 {/* Enhanced Timer */}
-                <div className="mt-1 sm:mt-2 inline-flex flex-col items-center min-w-[170px] sm:min-w-[190px] rounded-2xl border border-white/15 bg-black/35 backdrop-blur-xl px-5 py-2.5 sm:px-6 sm:py-3 shadow-[0_10px_28px_rgba(0,0,0,0.4)]">
+                <div className="mt-1 sm:mt-2 inline-flex flex-col items-center min-w-[170px] sm:min-w-[190px] max-[360px]:min-w-[150px] rounded-2xl border border-white/15 bg-black/35 backdrop-blur-xl px-5 py-2.5 sm:px-6 sm:py-3 max-[360px]:px-4 max-[360px]:py-2 shadow-[0_10px_28px_rgba(0,0,0,0.4)]">
                   <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.22em] text-white/55 font-semibold">
                     Time Left
                   </span>
-                  <span className="countdown font-mono mt-1 text-[36px] sm:text-[42px] leading-none font-light tracking-[-0.03em] text-white">
+                  <span className="countdown font-mono mt-1 text-[36px] sm:text-[42px] max-[360px]:text-[30px] leading-none font-light tracking-[-0.03em] text-white">
                     <span
                       style={{ "--value": timerMinutes, "--digits": 2 } as CSSProperties}
                       aria-live="polite"
@@ -463,15 +463,15 @@ export default function Home() {
           </div>
         ) : (
           /* ── Idle Hero ── */
-          <div className="relative w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center md:justify-between gap-8 md:gap-16">
+          <div className="relative w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-center md:justify-between gap-8 md:gap-16 max-[360px]:gap-6">
             {/* Text Content */}
             <div className="relative z-20 flex flex-col items-center md:items-start text-center md:text-left">
               <h2 className="text-[10px] sm:text-sm md:text-base text-rose-300 font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-3 sm:mb-4 animate-fade-in-up">
                 • {CREATOR.role}
               </h2>
-              <br />
+              <br className="max-[360px]:hidden" />
 
-              <h1 className="text-[3.2rem] sm:text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mix-blend-exclusion">
+              <h1 className="text-[3.2rem] sm:text-6xl md:text-8xl max-[360px]:text-[2.4rem] font-black tracking-tighter leading-[0.9] max-[360px]:leading-[0.95] mix-blend-exclusion">
                 <span className="block">{firstName}</span>
                 {lastName && (
                   <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">
@@ -479,8 +479,8 @@ export default function Home() {
                   </span>
                 )}
               </h1>
-              <br />
-              <br />
+              <br className="max-[360px]:hidden" />
+              <br className="max-[360px]:hidden" />
 
               {/* Desktop CTA */}
               <div className="animate-fade-in-up mt-6 sm:mt-8 shrink-0 hidden md:block w-full sm:w-auto">
@@ -509,7 +509,7 @@ export default function Home() {
             </div>
 
             {/* Image */}
-            <div className="relative w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[600px] flex-shrink-0 translate-x-2 sm:translate-x-8 md:translate-x-6">
+            <div className="relative w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[600px] max-[360px]:w-[200px] max-[360px]:h-[200px] flex-shrink-0 translate-x-2 sm:translate-x-8 md:translate-x-6">
               <div
                 ref={(el) => {
                   avatarRefs.current[1] = el;
@@ -539,10 +539,10 @@ export default function Home() {
             </div>
 
             {/* Mobile CTA */}
-            <div className="animate-fade-in-up mt-8 md:hidden w-full flex justify-center z-30">
+            <div className="animate-fade-in-up mt-8 max-[360px]:mt-6 md:hidden w-full flex justify-center z-30">
               <button
                 onClick={handleStartTalking}
-                className="group relative inline-flex items-center justify-center rounded-full bg-white text-black font-bold text-sm tracking-wide w-[200px] h-14 sm:h-16 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:scale-105 transition-all duration-300"
+                className="group relative inline-flex items-center justify-center rounded-full bg-white text-black font-bold text-sm tracking-wide w-[200px] h-14 sm:h-16 max-[360px]:w-[180px] max-[360px]:h-12 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:scale-105 transition-all duration-300"
               >
                 <span className="flex items-center justify-center gap-3 w-full">
                   Start Session
