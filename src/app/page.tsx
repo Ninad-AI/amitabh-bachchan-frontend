@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { startStreamingMic, type StreamingMicHandle } from "./utils/audioUtils";
-import VoiceSessionUI from "@/components/VoiceSessionUI";
-import Aurora from "@/components/ui/Aurora";
+import VoiceSessionUI from "../components/VoiceSessionUI";
+import Aurora from "../components/ui/Aurora";
 
 type FlowState = "idle" | "auth" | "payment" | "active";
 type CallPhase = "connecting" | "listening" | "speaking";
@@ -14,15 +14,16 @@ const WS_URL = process.env.NEXT_PUBLIC_BACKEND_WS_URL || "ws://localhost:8000/ws
 const CREATOR = {
   name: "Amitabh Bachchan",
   image: "/amitabh-3.jpg",
-  role: "Actor and Host",
+  role: "Actor and Icon",
 };
 
 const TIME_OPTIONS = [
-  { minutes: 0.5, price: 49, label: "30 sec" },
-  { minutes: 15, price: 299, label: "15 min" },
-  { minutes: 20, price: 399, label: "20 min" },
-  { minutes: 30, price: 599, label: "30 min" },
-  { minutes: 60, price: 999, label: "60 min" },
+  { minutes: 3, price: 59, label: "3 min" },
+  { minutes: 5, price: 99, label: "5 min" },
+  { minutes: 10, price: 189, label: "10 min" },
+  { minutes: 15, price: 279, label: "15 min" },
+  { minutes: 20, price: 379, label: "20 min" },
+  { minutes: 30, price: 569, label: "30 min" },
 ];
 
 export default function Home() {
@@ -46,6 +47,8 @@ export default function Home() {
   const sourceEndPromisesRef = useRef<Promise<void>[]>([]);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const ttsActiveRef = useRef(false);
+  const [firstName, ...restName] = CREATOR.name.split(" ");
+  const lastName = restName.join(" ");
 
   /* ── Entrance animation + mouse-follow parallax ── */
   useEffect(() => {
@@ -357,8 +360,9 @@ export default function Home() {
               <br />
 
 <h1 className="text-[2.6rem] xs:text-[3.2rem] sm:text-6xl md:text-8xl font-black tracking-tighter leading-[1.05] md:leading-[1.1] mix-blend-exclusion mt-2">
-  <span className="block text-transparent bg-clip-text bg-linear-to-r from-white to-white/50">
-    {CREATOR.name}
+  <span className="block">{firstName}</span>
+  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">
+    {lastName ? `${lastName}.` : ""}
   </span>
 </h1>
 
@@ -369,7 +373,7 @@ export default function Home() {
               <div className="animate-fade-in-up mt-8 shrink-0 hidden md:block">
                 <button
                   onClick={handleStartTalking}
-                  className="group relative inline-flex items-center justify-center rounded-full bg-white text-black font-bold text-sm sm:text-base tracking-wide w-55 h-14 sm:h-16 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:scale-105 transition-all duration-300"
+                  className="group relative inline-flex items-center justify-center rounded-full bg-white text-black font-bold text-sm sm:text-base tracking-wide w-[220px] h-14 sm:h-16 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:scale-105 transition-all duration-300"
                 >
                   <span className="flex items-center gap-3">
                     Start Session
@@ -382,21 +386,14 @@ export default function Home() {
             </div>
 
             {/* Image */}
-            <div className="relative w-50 h-50 xs:w-60 xs:h-60 sm:w-75 sm:h-75 md:w-125 md:h-150 shrink-0">
+            <div className="relative w-[200px] h-[200px] xs:w-[240px] xs:h-[240px] sm:w-[300px] sm:h-[300px] md:w-[500px] md:h-[600px] flex-shrink-0">
               <div
                 ref={(el) => { avatarRefs.current[1] = el; }}
                 className="relative w-full h-full overflow-hidden shadow-2xl hover:scale-[1.02] transition-transform duration-700 will-change-transform"
                 style={{ borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%" }}
               >
-                <Image
-                  src={CREATOR.image}
-                  alt={CREATOR.name}
-                  fill
-                  sizes="(min-width: 768px) 500px, (min-width: 640px) 300px, (min-width: 475px) 240px, 200px"
-                  className="object-cover object-[75%_center] scale-100"
-                  priority
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent opacity-60" />
+                <Image src={CREATOR.image} alt={CREATOR.name} fill className="object-cover object-[75%_center] scale-100" priority />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
               </div>
 
               {/* Floating Decorative Elements — clipped so they don't overflow on tiny screens */}
@@ -414,7 +411,7 @@ export default function Home() {
             <div className="animate-fade-in-up mt-6 md:hidden w-full flex justify-center z-30">
               <button
                 onClick={handleStartTalking}
-                className="group relative inline-flex items-center justify-center gap-3 rounded-full bg-white text-black font-bold text-sm tracking-wide w-45 xs:w-50 h-13 sm:h-16 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:scale-105 transition-all duration-300"
+                className="group relative inline-flex items-center justify-center gap-3 rounded-full bg-white text-black font-bold text-sm tracking-wide w-[180px] xs:w-[200px] h-13 sm:h-16 shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.5)] hover:scale-105 transition-all duration-300"
               >
                 Start Session
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -436,15 +433,15 @@ export default function Home() {
           />
 
           {/* Modal Card */}
-          <div className="relative w-[92vw] max-w-90 sm:w-full sm:max-w-md animate-fade-in-up">
+          <div className="relative w-[92vw] max-w-[360px] sm:w-full sm:max-w-md animate-fade-in-up">
             <div
               className={`
                 relative bg-black/80 backdrop-blur-3xl border border-white/10 shadow-2xl
                 flex flex-col justify-center overflow-hidden
                 px-6 sm:px-8
                 ${flowState === "payment"
-                  ? "p-6 sm:p-8 md:p-10 min-h-100 sm:min-h-110"
-                  : "py-10 sm:py-12 md:py-14 min-h-45 sm:min-h-55"
+                  ? "p-6 sm:p-8 md:p-10 min-h-[400px] sm:min-h-[440px]"
+                  : "py-10 sm:py-12 md:py-14 min-h-[180px] sm:min-h-[220px]"
                 }
               `}
               style={{ borderRadius: "1.5rem" }}
@@ -454,7 +451,7 @@ export default function Home() {
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/20 blur-[80px] rounded-full pointer-events-none" />
 
               <div className="relative z-10 flex flex-col h-full justify-center items-center">
-                <div className="w-full max-w-85 flex flex-col justify-center">
+                <div className="w-full max-w-[340px] flex flex-col justify-center">
 
                   <div className="text-left w-full sm:w-[320px] mx-auto px-4 sm:px-6">
                     <h3 className="text-[30px] sm:text-[32px] md:text-[34px] font-black mb-1.5 sm:mb-2 text-white tracking-tight leading-tight">
@@ -484,7 +481,7 @@ export default function Home() {
                   {flowState === "payment" && (
                     <div className="w-full animate-fade-in-up flex flex-col items-center gap-4 sm:gap-5 mt-1 sm:mt-2">
                       {/* Duration Grid — 6-col so top row is 3×2 and bottom row is 2×3 (equal halves) */}
-                      <div className="w-[86%] sm:w-full max-w-70 sm:max-w-[320px] self-center grid grid-cols-6 gap-x-2.5 gap-y-2.5 sm:gap-x-3 sm:gap-y-3">
+                      <div className="w-[86%] sm:w-full max-w-[280px] sm:max-w-[320px] self-center grid grid-cols-6 gap-x-2.5 gap-y-2.5 sm:gap-x-3 sm:gap-y-3">
                         {TIME_OPTIONS.map((opt, index) => {
                           const isSelected = selectedMinutes === opt.minutes;
                           const colSpan = index < 3 ? "col-span-2" : "col-span-3";
@@ -494,11 +491,11 @@ export default function Home() {
                               key={opt.minutes}
                               onClick={() => handleSelectTime(opt.minutes)}
                               className={`
-                                ${colSpan} h-15.5 sm:h-17 rounded-xl sm:rounded-2xl border transition-all duration-300
+                                ${colSpan} h-[62px] sm:h-[68px] rounded-xl sm:rounded-2xl border transition-all duration-300
                                 flex flex-col items-center justify-center
                                 ${isSelected
                                   ? "border-white bg-white/10 text-white shadow-lg"
-                                  : "border-white/20 bg-white/2 text-white/70 hover:border-white/50"
+                                  : "border-white/20 bg-white/[0.02] text-white/70 hover:border-white/50"
                                 }
                               `}
                             >
@@ -519,9 +516,9 @@ export default function Home() {
                           onClick={handlePayAndStart}
                           disabled={!selectedMinutes}
                           className={`
-                            w-[86%] sm:w-[320px] h-16 rounded-2xl font-semibold text-lg transition-all duration-500
+                            w-[86%] sm:w-[320px] h-[64px] rounded-2xl font-semibold text-lg transition-all duration-500
                             ${selectedMinutes
-                              ? "bg-linear-to-r from-pink-500 via-red-500 to-orange-500 text-white shadow-[0_10px_40px_rgba(255,80,80,0.35)] hover:scale-[1.02]"
+                              ? "bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 text-white shadow-[0_10px_40px_rgba(255,80,80,0.35)] hover:scale-[1.02]"
                               : "bg-white/10 text-white/30 border border-white/10 cursor-not-allowed"
                             }
                           `}

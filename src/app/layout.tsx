@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "Amitabh Bachchan — Voice Chat",
   description:
-    "Premium interactive voice chat experience with Amitabh Bachchan, Actor and Entertainer. Start a live session now.",
+    "Premium interactive voice chat experience with Amitabh Bachchan. Start a live session now.",
 };
 
 export default function RootLayout({

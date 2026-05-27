@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Ripple from '@/components/ui/ripple';
+import Ripple from './ui/ripple';
 
 interface VoiceSessionUIProps {
     isSpeaking: boolean;
@@ -53,7 +53,7 @@ export default function VoiceSessionUI({
 
 
             {/* Close button */}
-            <div className="fixed right-4 top-4 z-100 sm:right-8 sm:top-8">
+            <div className="fixed right-4 top-4 z-[100] sm:right-8 sm:top-8">
                 <button
                     onClick={onEndCall}
                     title="End Session"
@@ -117,7 +117,6 @@ export default function VoiceSessionUI({
                             src={creatorImage}
                             alt={creatorName}
                             fill
-                            sizes={`${IMG_SIZE}px`}
                             className="object-cover object-[75%_center] scale-100"
                             priority
                         />
@@ -128,7 +127,7 @@ export default function VoiceSessionUI({
                     </div>
 
                     {/* Controls - absolutely below the circle, so they don't shift the image */}
-                    <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 translate-y-38.75 flex-col items-center gap-8">
+                    <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 translate-y-[155px] flex-col items-center gap-8">
                         {/* Timer */}
                         <span className="tabular-nums text-5xl font-extralight tracking-tight text-white/95 drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] sm:text-6xl">
                             {formatTime(timeLeft)}

@@ -247,10 +247,10 @@ body {
   }
 
   .gradient-background {
-    @apply bg-linear-to-b from-[#2A5C6B] via-[#855D4E] to-[#E57621] overflow-hidden text-white font-sans flex flex-col justify-between;
+    @apply bg-gradient-to-b from-[#2A5C6B] via-[#855D4E] to-[#E57621] overflow-hidden text-white font-sans flex flex-col justify-between;
   }
 
   .avatar-glow {
-    @apply absolute -inset-5 rounded-full bg-white/20 blur-2xl transition-all duration-1000 ease-out pointer-events-none;
+    @apply absolute inset-[-20px] rounded-full bg-white/20 blur-2xl transition-all duration-1000 ease-out pointer-events-none;
   }
 }
